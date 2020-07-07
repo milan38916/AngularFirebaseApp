@@ -1,0 +1,36 @@
+.h2{
+  background-color: rgb(52, 58, 64);
+  text-align: center;
+  width: 65vw;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10vh;
+  color: white;
+  margin-bottom: 0;
+  padding-bottom: 1vh;
+  padding-top: 2.5vh;
+  border-top-left-radius: 1vw;
+  border-top-right-radius: 1vw;
+}
+.form-group{
+  width: 65vw;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10vh;
+  background-color: rgb(52, 58, 64);
+  color: white;
+  padding-bottom: 3.5vh;
+  border-bottom-left-radius: 1vw;
+  border-bottom-right-radius: 1vw;
+}
+.form-control{
+  width: 60vw;
+}
+.btn{
+  margin-left: 2.5vw;
+  margin-top: 1vh;
+  width: 15vw;
+}
+label{
+  margin-left: 2.5vw;
+}

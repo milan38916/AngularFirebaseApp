@@ -1,0 +1,60 @@
+.card-columns {
+  width: 80vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 7vh;
+  position: relative;
+}
+
+.card{
+  color: white;
+  transition: all 0.9s;
+}
+
+.card-header{
+  text-align: center;
+}
+
+.btn{
+  margin-top: auto;
+}
+
+.card:hover .card-front{
+  transform: rotateY(180deg);
+  transform-style: preserve-3d;
+}
+
+.card:hover .card-back{
+  transform: rotateY(0deg);
+  transform-style: preserve-3d;
+}
+
+.card-back{
+  position: relative;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.card-front{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transform: rotateY(0deg);
+  backface-visibility: hidden;
+}
+
+.main{
+  padding-top: 7vh;
+  width: 80vw;
+  height: 80vh;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: auto;
+}
+
+.main::-webkit-scrollbar{
+  display: none;
+}
+

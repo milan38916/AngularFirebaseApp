@@ -1,0 +1,20 @@
+.card{
+  width: max-content;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 1vw;
+  border-bottom-left-radius: 1vw;
+  border-top-left-radius: 1vw;
+  border-top-right-radius: 1vw;
+margin-top: 10vh;
+}
+.table{
+  color: white;
+}
+
+.h2{
+  text-align: center;
+}

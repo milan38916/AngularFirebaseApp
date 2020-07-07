@@ -1,0 +1,10 @@
+.container{
+  width: 100vw;
+  height: 91.4vh;
+  color: white;
+  max-width: 100vw;
+}
+.h2{
+  text-align: center;
+  padding-top: 25vh;
+}

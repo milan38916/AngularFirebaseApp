@@ -1,0 +1,54 @@
+.form-group{
+  width: 65vw;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  border-bottom-left-radius: 1vw;
+  border-bottom-right-radius: 1vw;
+}
+.h2{
+  width: 65vw;
+  padding-bottom: 1vh;
+  padding-top: 2.5vh;
+  color: white;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  border-top-left-radius: 1vw;
+  border-top-right-radius: 1vw;
+}
+.form-control{
+  width: 60vw;
+}
+
+.btn-primary{
+  margin-left: 2.5vw;
+  margin-bottom: 2vh;
+  margin-top: 1vh;
+  font-size: 2.25vh;
+  position: relative;
+  width: 60vw;
+}
+
+label{
+  margin-left: 2.5vw;
+}
+
+legend{
+  padding-left: 1vw;
+}
+
+.main{
+  padding-top: 7vh;
+  width: 65vw;
+  height: 80vh;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: auto;
+  padding-bottom: 8vh;
+}
+
+.main::-webkit-scrollbar{
+  display: none;
+}

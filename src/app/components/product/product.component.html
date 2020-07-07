@@ -1,0 +1,17 @@
+<div class="h2 bg-dark" *ngIf="productDetail">{{productDetail.name}}</div>
+<div  class="card flex-row flex-wrap">
+  <div class="card-header border-0">
+    <img src="//placehold.it/200" alt="">
+  </div>
+  <div class="card-block px-2">
+    <h4 class="card-title">{{productDetail.name}}</h4>
+    <p class="card-text">{{productDetail.about}}</p>
+    <p class="card-text">{{productDetail.price}}</p>
+    <a href="#" class="btn btn-primary">Add to Cart</a>
+  </div>
+  <div class="w-100"></div>
+  <div class="card-footer w-100 text-muted">
+    Footer stating cats are CUTE little animals
+  </div>
+</div>
+

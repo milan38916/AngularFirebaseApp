@@ -1,0 +1,18 @@
+<div class="h2 bg-dark">Shopping Cart</div>
+<table class="table table-dark">
+  <thead class="thead-dark">
+    <th>Name</th>
+    <th>Price</th>
+    <th>Count</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of getItems.shopCartItemsArray">
+      <td>{{item.name}}</td>
+      <td>{{item.price}}</td>
+      <td><input class="form-control bg-dark" type="number" step="1"></td>
+      <td><div class="btn btn-danger" (click)="deleteItem(item.name)">Delete</div></td>
+    </tr>
+  </tbody>
+</table>
+

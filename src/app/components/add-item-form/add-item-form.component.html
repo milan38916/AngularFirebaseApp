@@ -1,0 +1,41 @@
+<div class="main">
+<div class="h2 bg-dark">Add Item</div>
+<div class="form-group bg-dark">
+  <form [formGroup]="myForm" (ngSubmit)="addItem(myForm.value)">
+    <fieldset>
+      <legend>Basic Info</legend>
+      <label>ID
+        <input formControlName="id" class="form-control" type="text">
+      </label>
+      <label>Category
+        <input formControlName="category" class="form-control" type="text">
+      </label>
+      <label>Name
+        <input formControlName="name" class="form-control" type="text">
+      </label>
+      <label>About
+        <input formControlName="about" class="form-control" type="text">
+      </label>
+      <label>Price
+        <input formControlName="price" class="form-control" type="text">
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>Parameters</legend>
+      <label>Operation System
+        <input formControlName="os" class="form-control" type="text">
+      </label>
+      <label>Size
+        <input formControlName="size" class="form-control" type="text">
+      </label>
+      <label>Display Size
+        <input formControlName="displaysize" class="form-control" type="text">
+      </label>
+      <label>Weight
+        <input formControlName="weight" class="form-control" type="text">
+      </label>
+    </fieldset>
+    <button class="btn btn-primary" type="submit">Add Item</button>
+  </form>
+</div>
+</div>

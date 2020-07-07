@@ -1,0 +1,21 @@
+<div class="card bg-dark">
+  <div class="card-header h2">Current User</div>
+  <table class="table">
+    <thead>
+      <th>Email</th>
+      <th>UID</th>
+      <th>Display Name</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{email}}</td>
+        <td>{{UID}}</td>
+        <td>{{displayname}}</td>
+      </tr>
+    </tbody>
+    </table>
+  <div routerLink="updateUser" class="btn btn-warning">Update</div>
+</div>
+<router-outlet></router-outlet>
+
+

@@ -1,0 +1,28 @@
+.bg-dark{
+  color: white;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.form-control{
+  width: 10vw;
+}
+
+.h2{
+  margin-top: 10vh;
+  border-top-right-radius: 1vw;
+  border-top-left-radius: 1vw;
+  padding-bottom: 1vh;
+  padding-top: 2.5vh;
+}
+
+.h2, table{
+  width: 60vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table{
+  border-bottom-right-radius: 1vw;
+  border-bottom-left-radius: 1vw;
+}

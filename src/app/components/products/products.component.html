@@ -1,0 +1,28 @@
+<div class="main">
+<div class="card-columns">
+  <div class="card bg-dark" *ngFor="let item of items | async">
+    <div class="card-front">
+      <div class="container h-100 d-flex justify-content-center">
+        <div class="h5 row justify-content-center align-self-center">{{item.name}}</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="card-header" (click)="itemDetail(item.name)" [routerLink]="['/products',item.name]" routerLinkActive="active">
+        {{item.name}}
+      </div>
+      <div class="card-title">
+        Name: {{item.name}}
+      </div>
+      <div class="card-text" *ngIf="item.about">
+        About: {{item.about}}
+      </div>
+      <div class="card-text">
+        Price: {{item.price}}
+      </div>
+      <div class="btn btn-dark" (click)="addToCart(item.name)">Add to Card</div>
+    </div>
+  </div>
+</div>
+</div>
+<app-modal-warning></app-modal-warning>
+<router-outlet></router-outlet>
