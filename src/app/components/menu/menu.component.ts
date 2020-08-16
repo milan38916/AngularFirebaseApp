@@ -53,22 +53,16 @@ export class MenuComponent implements OnInit {
   }
   changeComponent(change: number) {
     if (change === 0) {
-      //this.data.changeComponent(ProductsComponent);
       this.route.navigate(['/products']);
     } else if (change === 1) {
-      //this.data.changeComponent(AddItemFormComponent);
       this.route.navigate(['/additem']);
     } else if (change === 2) {
-      //this.data.changeComponent(LoginComponent);
       this.route.navigate(['/login']);
     } else if (change === 3) {
-      //this.data.changeComponent(RegisterComponent);
       this.route.navigate(['/register']);
     } else if (change === 4) {
-      //this.data.changeComponent(UserComponent);
       this.route.navigate(['/user']);
     } else if (change === 5) {
-      //this.data.changeComponent(ShopcartComponent);
       this.route.navigate(['/cart']);
     } else {
       this.dialog.open(SearchItemComponent);
