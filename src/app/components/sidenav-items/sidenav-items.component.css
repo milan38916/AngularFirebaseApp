@@ -1,0 +1,37 @@
+.container{
+  width: 10vw;
+  height: 91.55vh;
+  background-color: red;
+  float: left;
+}
+
+.components{
+  position: relative;
+}
+
+.animate::before{
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 0.5vw;
+  background-color: green;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: scaleY(0);
+  transition: all 0.5s;
+}
+
+.animate:hover::before{
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+p{
+  font-size: 1vw;
+}
+.subcat{
+  margin-left: 2vw;
+}
+
+

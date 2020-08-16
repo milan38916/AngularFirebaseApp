@@ -1,41 +1,380 @@
 <div class="main">
 <div class="h2 bg-dark">Add Item</div>
 <div class="form-group bg-dark">
-  <form [formGroup]="myForm" (ngSubmit)="addItem(myForm.value)">
+  <div class="form">
     <fieldset>
       <legend>Basic Info</legend>
       <label>ID
-        <input formControlName="id" class="form-control" type="text">
+        <input [(ngModel)]="id" class="form-control" type="number">
       </label>
       <label>Category
-        <input formControlName="category" class="form-control" type="text">
+        <select [(ngModel)]="category" class="form-control">
+          <option>PCs</option>
+          <option>Notebooks</option>
+          <option>Smartphones</option>
+          <option>Components</option>
+          <option>TVs</option>
+          <option>Monitors</option>
+        </select>
       </label>
-      <label>Name
-        <input formControlName="name" class="form-control" type="text">
+      <label>Brand
+        <select [(ngModel)]="brand" class="form-control">
+          <option>Apple</option>
+          <option>Xiaomi</option>
+          <option>Samsung</option>
+          <option>Huawei</option>
+          <option>Lenovo</option>
+          <option>Asus</option>
+          <option>MSI</option>
+          <option>OnePlus</option>
+          <option>LG</option>
+          <option>Sony</option>
+        </select>
+      </label>
+      <label>Model
+        <input [(ngModel)]="model" class="form-control" type="text">
       </label>
       <label>About
-        <input formControlName="about" class="form-control" type="text">
+        <input [(ngModel)]="about" class="form-control" type="text">
       </label>
       <label>Price
-        <input formControlName="price" class="form-control" type="text">
+        <input [(ngModel)]="price" class="form-control" type="text">
       </label>
     </fieldset>
+    <div [ngSwitch]="category">
+    <fieldset *ngSwitchCase="'Smartphones'">
+        <legend>Parameters</legend>
+      <label>Use
+        <select [(ngModel)]="use" class="form-control">
+          <option>Smartphone</option>
+          <option>Gaming Smartphone</option>
+        </select>
+      </label>
+      <label>OS
+        <select [(ngModel)]="os" class="form-control">
+          <option>Android</option>
+          <option>iOS</option>
+        </select>
+      </label>
+      <div [ngSwitch]="os">
+        <label *ngSwitchCase="'Android'">Version
+          <select [(ngModel)]="androidVersion" class="form-control">
+            <option>6.0</option>
+            <option>7.0</option>
+            <option>8.0</option>
+            <option>9.0</option>
+            <option>10.0</option>
+          </select>
+        </label>
+        <label *ngSwitchCase="'iOS'">Version
+          <select [(ngModel)]="iosVersion" class="form-control">
+            <option>8.0</option>
+            <option>9.0</option>
+            <option>10.0</option>
+            <option>11.0</option>
+            <option>12.0</option>
+            <option>13.0</option>
+            <option>14.0</option>
+          </select>
+        </label>
+      </div>
+      <legend>Power</legend>
+      <label>Processor
+        <input [(ngModel)]="processor" class="form-control" type="text">
+      </label>
+      <label>CPU Cores
+        <input [(ngModel)]="countCpuCores" class="form-control" type="text">
+      </label>
+      <label>Frequency of CPU
+        <input [(ngModel)]="cpuFrequency" class="form-control" type="text">
+      </label>
+      <label>Operating Memory
+        <input [(ngModel)]="opMemory" class="form-control" type="text">
+      </label>
+      <label>Graphis
+        <input [(ngModel)]="graphis" class="form-control" type="text">
+      </label>
+      <label>Memory
+        <input [(ngModel)]="memory" class="form-control" type="text">
+      </label>
+      <legend>Battery</legend>
+      <label>Capacity
+        <input [(ngModel)]="batteryCapacity" class="form-control" type="text">
+      </label>
+      <label>User Battery Change
+        <input [(ngModel)]="userBatteryChange" class="form-control" type="text">
+      </label>
+      <label>Charge Power
+        <input [(ngModel)]="chargePower" class="form-control" type="text">
+      </label>
+      <label>Charge Time
+        <input [(ngModel)]="chargeTime" class="form-control" type="text">
+      </label>
+      <legend>Communication</legend>
+      <label>Wifi
+        <select [(ngModel)]="wifi" class="form-control">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </label>
+      <div [ngSwitch]="wifi">
+        <label *ngSwitchCase="'Yes'">Wifi Verison
+          <select [(ngModel)]="wifiVersion" class="form-control">
+            <option>802.11n</option>
+            <option>802.11ac</option>
+            <option>802.11ax</option>
+          </select>
+        </label>
+      </div>
+      <label>Bluetooth
+        <select [(ngModel)]="bluetooth" class="form-control">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </label>
+      <div [ngSwitch]="bluetooth">
+      <label *ngSwitchCase="'Yes'">Bluetooth Verison
+        <select [(ngModel)]="btVersion" class="form-control">
+          <option>2.0</option>
+          <option>2.1</option>
+          <option>3.0</option>
+          <option>4.0</option>
+          <option>4.1</option>
+          <option>4.2</option>
+          <option>5.0</option>
+          <option>5.1</option>
+          <option>5.2</option>
+        </select>
+      </label>
+      </div>
+      <label>GPS
+        <select [(ngModel)]="gps" class="form-control">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </label>
+      <label>NFC
+        <select [(ngModel)]="nfc" class="form-control">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </label>
+      <label>Sensors
+        <input [(ngModel)]="sensors" class="form-control" type="text">
+      </label>
+      <legend>Connectors</legend>
+      <label>Jack
+        <select [(ngModel)]="jack" class="form-control">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </label>
+      <label>USB
+        <select [(ngModel)]="usb" class="form-control">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </label>
+      <div [ngSwitch]="usb">
+      <label *ngSwitchCase="'Yes'">USB Type
+        <select [(ngModel)]="usbType" class="form-control">
+          <option>Mini USB</option>
+          <option>Micro USB</option>
+          <option>USB type C</option>
+        </select>
+      </label>
+      </div>
+      <label>Sim Card
+        <select [(ngModel)]="simCard" class="form-control">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </label>
+      <div [ngSwitch]="simCard">
+        <label *ngSwitchCase="'Yes'">SimCard Type
+          <select [(ngModel)]="simType" class="form-control">
+            <option>Micro SIM</option>
+            <option>Nano SIM</option>
+            <option>Standart SIM</option>
+          </select>
+        </label>
+      </div>
+      </fieldset>
+      <fieldset *ngSwitchCase="'PCs'">
+        <legend>Parameters</legend>
+        <label>Operation System
+          <select [(ngModel)]="os" class="form-control">
+            <option>Linux</option>
+            <option>MacOS</option>
+            <option>Windows</option>
+            <option>without OS</option>
+          </select>
+        </label>
+        <label>Use
+          <select [(ngModel)]="use" class="form-control">
+            <option>Gaming</option>
+            <option>Workstation</option>
+            <option>All-in-one</option>
+          </select>
+        </label>
+        <legend>CPU</legend>
+        <label>Rad
+          <input [(ngModel)]="radCpu" class="form-control" type="text">
+        </label>
+        <label>Model
+          <input [(ngModel)]="modelCpu" class="form-control" type="text">
+        </label>
+        <label>Frekvencia
+          <input [(ngModel)]="frekvenciaCpu" class="form-control" type="text">
+        </label>
+        <label>Počet Jadier
+          <input [(ngModel)]="pocetJadier" class="form-control" type="number">
+        </label>
+        <label>Cache
+          <input [(ngModel)]="cacheCpu" class="form-control" type="text">
+        </label>
+        <label>Boost
+          <input [(ngModel)]="boostCpu" class="form-control" type="text">
+        </label>
+        <label>TDP
+          <input [(ngModel)]="tdpCpu" class="form-control" type="text">
+        </label>
+        <legend>Graphis Card</legend>
+        <label>Graphis Model
+          <input [(ngModel)]="modelGpu" class="form-control" type="text">
+        </label>
+        <label>Memory
+          <input [(ngModel)]="memoryGpu" class="form-control" type="text">
+        </label>
+        <label>Count of GPU Cores
+          <input [(ngModel)]="coresGpu" class="form-control" type="text">
+        </label>
+        <legend>Motherboard</legend>
+        <label>Model
+          <input [(ngModel)]="motherboard" class="form-control" type="text">
+        </label>
+        <label>Socket
+          <input [(ngModel)]="motherboardSocket" class="form-control" type="text">
+        </label>
+        <legend>Disk</legend>
+        <label>Disk Brand
+          <input [(ngModel)]="diskBrand" class="form-control" type="text">
+        </label>
+        <label>Type
+          <input [(ngModel)]="diskType" class="form-control" type="text">
+        </label>
+        <div class="row-cols-2">
+          <label class="col-sm-6 w-50">Size
+            <input [(ngModel)]="diskSize" class="form-control" type="text">
+          </label>
+          <label class="col-sm-6 w-50">Unit
+            <select [(ngModel)]="diskUnit" class="form-control">
+              <option>Mb</option>
+              <option>Gb</option>
+              <option>Tb</option>
+            </select>
+          </label>
+        </div>
+        <legend>Size of PC</legend>
+        <label>Size of case
+          <input [(ngModel)]="sizeCase" class="form-control" type="text">
+        </label>
+        <legend>Weight</legend>
+        <label>Weight of PC
+          <input [(ngModel)]="weightPc" class="form-control" type="text">
+        </label>
+      </fieldset>
+      <fieldset *ngSwitchCase="'Monitors'">
+        <legend>Rozlíšenie</legend>
+        <label>Rozlíšenie
+          <input [(ngModel)]="rozlisenie" class="form-control" type="text">
+        </label>
+        <label>Typ Rozlíšenia
+          <select [(ngModel)]="typrozlisenia" class="form-control">
+            <option>HD</option>
+            <option>Full HD</option>
+            <option>QHD</option>
+            <option>UHD</option>
+          </select>
+        </label>
+        <label>Uhlopriečka
+          <input [(ngModel)]="uhlopriecka" class="form-control" type="text">
+        </label>
+        <legend>Obrazovka</legend>
+        <label>Display
+          <input [(ngModel)]="displej" class="form-control" type="text">
+        </label>
+        <label>Obnovovacia Frekvencia
+          <select [(ngModel)]="obnovovaciaFrekvencia" class="form-control">
+            <option>60 Hz</option>
+            <option>70 Hz</option>
+            <option>75 Hz</option>
+            <option>90 Hz</option>
+            <option>105 Hz</option>
+            <option>120 Hz</option>
+            <option>144 Hz</option>
+            <option>165 Hz</option>
+            <option>240 Hz</option>
+            <option>300 Hz</option>
+          </select>
+        </label>
+        <label>Odozva
+          <input [(ngModel)]="odozva" class="form-control" type="text">
+        </label>
+        <label>Jas
+          <input [(ngModel)]="jas" class="form-control" type="text">
+        </label>
+        <label>Kontrast
+          <input [(ngModel)]="kontrast" class="form-control" type="text">
+        </label>
+        <label>Pomer Strán
+          <input [(ngModel)]="pomerStran" class="form-control" type="text">
+        </label>
+        <label>Povrch Displeja
+          <input [(ngModel)]="povrchDispleja" class="form-control" type="text">
+        </label>
+        <label>Konštrukcia
+          <input [(ngModel)]="konstrukcia" class="form-control" type="text">
+        </label>
+        <legend>Porty</legend>
+        <label>Porty
+          <input [(ngModel)]="porty" class="form-control" type="text">
+        </label>
+        <legend>Vlastnosti</legend>
+        <label>Vlastnosti
+          <input [(ngModel)]="vlastnosti" class="form-control" type="text">
+        </label>
+        <label>Funkcie
+          <input [(ngModel)]="funkcie" class="form-control" type="text">
+        </label>
+        <legend>Rozmery</legend>
+        <label>Sirka
+          <input [(ngModel)]="sirka" class="form-control" type="text">
+        </label>
+        <label>Vyska
+          <input [(ngModel)]="vyska" class="form-control" type="text">
+        </label>
+        <label>Hlbka
+          <input [(ngModel)]="hlbka" class="form-control" type="text">
+        </label>
+        <label>Hmotnost
+          <input [(ngModel)]="hmotnost" class="form-control" type="text">
+        </label>
+      </fieldset>
+    </div>
     <fieldset>
-      <legend>Parameters</legend>
-      <label>Operation System
-        <input formControlName="os" class="form-control" type="text">
+      <legend>Images</legend>
+      <div class="fileUploadDiv">
+          <input multiple class="file" type="file" (change)="uploadItem($event)"/>
+      </div>
+      <label>Upload Progress
+        <mat-progress-bar mode="determinate" [value]="uploadProgressActualValue"></mat-progress-bar>
       </label>
-      <label>Size
-        <input formControlName="size" class="form-control" type="text">
-      </label>
-      <label>Display Size
-        <input formControlName="displaysize" class="form-control" type="text">
-      </label>
-      <label>Weight
-        <input formControlName="weight" class="form-control" type="text">
-      </label>
+      <!--<label>Image Url
+        <input [(ngModel)]="imgurl" [value]="imgurl" class="form-control" type="url">
+      </label>-->
     </fieldset>
-    <button class="btn btn-primary" type="submit">Add Item</button>
-  </form>
+    <button class="btn btn-primary" type="submit" (click)="addItem(category)">Add Item</button>
+  </div>
 </div>
 </div>

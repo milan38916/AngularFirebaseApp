@@ -1,0 +1,10 @@
+<h2 matDialogTitle>Search</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input (keydown)="dataitem.searchItems($event, category)" matInput type="search">
+  </mat-form-field>
+  <mat-dialog-actions>
+    <button mat-stroked-button (click)="close()">Close</button>
+  </mat-dialog-actions>
+</mat-dialog-content>

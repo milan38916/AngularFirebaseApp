@@ -1,0 +1,40 @@
+export class SmartPhoneModel {
+  // Basic data
+  id: number;
+  category: string;
+  brand: string;
+  model: string;
+  about: string;
+  price: string;
+  // Parameters
+  use: string;
+  os: string;
+  // Power
+  processor: string;
+  countCpuCores: string;
+  cpuFrequency: string;
+  operatingMemory: string;
+  graphis: string;
+  memory: string;
+  // Battery
+  batteryCapacity: string;
+  userBatteryChange: string;
+  chargePower: string;
+  chargeTime: string;
+  // Communication
+  wifi: string;
+  wifitype: string;
+  bluetooth: string;
+  bluetoothtype: string;
+  gps: string;
+  nfc: string;
+  sensors: string;
+  // Connectors
+  usb: string;
+  usbType: string;
+  jack: string;
+  simCard: string;
+  simType: string;
+  // Images
+  images: Array<string>;
+}

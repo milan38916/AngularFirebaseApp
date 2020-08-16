@@ -1,0 +1,18 @@
+<mat-sidenav-container>
+  <mat-sidenav
+    [(opened)]="isopen"
+    mode="over"
+    fixedInViewport="true">
+    <mat-toolbar>Products Menu</mat-toolbar>
+    <mat-nav-list>
+      <div *ngFor="let cat of category">
+        <a [routerLink]="cat.maincat" mat-list-item (click)="getDataItemByMainCategory(cat.maincat, cat.subcat)">{{cat.maincat}}</a>
+        <a [routerLink]="cat.maincat + '/' + subcat" mat-list-item class="subcat" (click)="getDataItemBySubCategory(cat.maincat, subcat)" *ngFor="let subcat of cat.subcat">{{subcat}}</a>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

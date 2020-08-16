@@ -8,8 +8,10 @@ import {AuthService} from '../../services/auth.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {first} from 'rxjs/operators';
 import {UserComponent} from '../user/user.component';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ShopcartComponent} from '../shopcart/shopcart.component';
+import {MatDialog} from '@angular/material/dialog';
+import {SearchItemComponent} from '../search-item/search-item.component';
 
 @Component({
   selector: 'app-menu',
@@ -20,7 +22,20 @@ export class MenuComponent implements OnInit {
   isLoggin: boolean;
   username: string;
   isAdmin = false;
-  constructor(private route: Router, private data: DataServiceService, private auth: AngularFireAuth, private authSer: AuthService) {
+  canSearch: boolean;
+  canOpenMenu = false;
+  constructor(private route: Router,
+              private data: DataServiceService,
+              private auth: AngularFireAuth,
+              private authSer: AuthService,
+              private activateroute: ActivatedRoute,
+              private dialog: MatDialog) {
+    this.data.canSearchItems.subscribe(value => {
+      this.canSearch = value;
+    });
+    this.data.canOpenSideMenu.subscribe(value => {
+      this.canOpenMenu = value;
+    });
   }
 
   ngOnInit() {
@@ -52,15 +67,20 @@ export class MenuComponent implements OnInit {
     } else if (change === 4) {
       //this.data.changeComponent(UserComponent);
       this.route.navigate(['/user']);
-    } else {
+    } else if (change === 5) {
       //this.data.changeComponent(ShopcartComponent);
       this.route.navigate(['/cart']);
+    } else {
+      this.dialog.open(SearchItemComponent);
     }
   }
 
   logoutClick() {
     this.authSer.logout();
     this.isAdmin = false;
+  }
+  openMenu() {
+    this.data.isopen.next(true);
   }
 
 }

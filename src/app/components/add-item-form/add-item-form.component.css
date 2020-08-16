@@ -52,3 +52,36 @@ legend{
 .main::-webkit-scrollbar{
   display: none;
 }
+.fileUploadDiv {
+  background-image: url("src/assets/icons/cloud-storage.svg");
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: center;
+  height: 35vh;
+  width: 60vw;
+  margin: 20px auto;
+  border: 0.25rem dashed #1C8ADB;
+  border-radius: 0.25rem;
+}
+
+.fileUploadDiv:hover {
+  cursor: pointer;
+  background-color: #9ecbec !important;
+  opacity: 0.8;
+}
+
+.file{
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+}
+
+mat-progress-bar{
+  width: 60vw;
+  margin-top: 2vh;
+}
+
+.form-row{
+  width: 60vw;
+}
+

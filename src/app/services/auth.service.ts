@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {User} from 'firebase';
 import {AngularFireAuth} from '@angular/fire/auth';
-import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
-import {first} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +37,7 @@ export class AuthService {
       console.log('Prihlaseny: ', value);
       this.isLoggin.next(true);
       this.email.next(email);
-      this.route.navigate(['/user']);
+      this.route.navigate(['/enter']);
     }).catch(error => {
       console.log('Nastala chyba: ', error);
       this.isLoggin.next(false);

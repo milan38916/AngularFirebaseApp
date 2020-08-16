@@ -8,7 +8,8 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalWarningComponent implements OnInit {
 
-  constructor(private modal: NgbActiveModal) { }
+  constructor(private modal: NgbActiveModal) {
+  }
 
   ngOnInit() {
   }

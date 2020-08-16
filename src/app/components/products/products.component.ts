@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {ShopingcartService} from '../../services/shopingcart.service';
@@ -7,19 +7,35 @@ import {AuthService} from '../../services/auth.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {ModalWarningComponent} from '../modal-warning/modal-warning.component';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {ActivatedRoute} from '@angular/router';
+import {CategoryModel} from '../../../models/CategoryModel';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   component: ModalWarningComponent;
   isLoggin = false;
-  items: Observable<any[]>;
-  constructor(private modal: NgbModal, private auth: AngularFireAuth, private data: DataServiceService, private getItem: ShopingcartService, private authSer: AuthService) {
-    this.items = this.data.getDataItems();
-    //console.log(this.items);
+  items = new Array<any>();
+  oneCategory: CategoryModel;
+  getdata: any;
+  category = new Array<CategoryModel>();
+  constructor(private modal: NgbModal,
+              private auth: AngularFireAuth,
+              private data: DataServiceService,
+              private getItem: ShopingcartService,
+              private fireData: AngularFireDatabase,
+              private route: ActivatedRoute) {
+    this.data.getCatData.subscribe(value => {
+      this.items = value;
+      console.log(this.items);
+    });
+    this.data.findValues.subscribe(value => {
+      this.items = value;
+    });
     this.auth.onAuthStateChanged(value => {
       if (value) {
         this.isLoggin = true;
@@ -27,18 +43,22 @@ export class ProductsComponent implements OnInit {
         this.isLoggin = false;
       }
     });
+    this.data.canOpenSideMenu.next(true);
   }
+
+  ngOnDestroy(): void {
+    this.data.canSearchItems.next(false);
+    }
   ngOnInit() {
+    this.data.canSearchItems.next(true);
   }
   itemDetail(name) {
     this.data.itemName.next(name);
   }
   addToCart(name: string) {
     if (this.isLoggin) {
-      console.log('zapisujem');
       this.getItem.getItemToCart(name);
     } else {
-      console.log('nezapisujem');
       const modelRef = this.modal.open(ModalWarningComponent);
       modelRef.componentInstance.title = 'Warning';
     }

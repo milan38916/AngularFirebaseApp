@@ -1,16 +1,29 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <div class="navbar-brand">eShop</div>
-  <div class="navbar-nav ml-auto">
-    <a class="nav-item nav-link" *ngIf="isAdmin" (click)="changeComponent(1)">ADD Product</a>
-    <a class="nav-item nav-link" (click)="changeComponent(0)">SHOW Items</a>
-    <a class="nav-item nav-link" *ngIf="!isLoggin" (click)="changeComponent(2)">Login</a>
-    <a class="nav-item nav-link" *ngIf="!isLoggin" (click)="changeComponent(3)">Register</a>
-    <a class="nav-item nav-link dropdown dropdown-toggle" data-toggle="dropdown" *ngIf="isLoggin">{{username}}
-      <div class="dropdown-menu bg-dark">
-        <a class="dropdown-item nav-item nav-link bg-dark" (click)="logoutClick()">Logout</a>
-        <a class="dropdown-item nav-item nav-link bg-dark" (click)="changeComponent(4)">Userinfo</a>
-        <a class="dropdown-item nav-item nav-link bg-dark" (click)="changeComponent(5)">ShopCart</a>
-      </div>
-    </a>
-  </div>
-</nav>
+<mat-toolbar color="primary">
+  <button *ngIf="canOpenMenu" mat-icon-button>
+    <mat-icon (click)="openMenu()">menu</mat-icon>
+  </button>
+  <span>eShop</span>
+  <span class="spacer"></span>
+  <button *ngIf="canSearch" mat-icon-button>
+    <mat-icon (click)="changeComponent(6)">search</mat-icon>
+  </button>
+  <button *ngIf="isAdmin" mat-icon-button>
+    <mat-icon (click)="changeComponent(1)">note_add</mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon (click)="changeComponent(0)">dashboard</mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon (click)="changeComponent(5)">shopping_cart</mat-icon>
+  </button>
+  <button *ngIf="isLoggin" mat-icon-button>
+    <mat-icon [matMenuTriggerFor]="subUser">account_box</mat-icon>
+  </button>
+  <button *ngIf="!isLoggin" mat-icon-button>
+    <mat-icon (click)="changeComponent(2)">login</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu #subUser>
+  <button (click)="changeComponent(4)" mat-menu-item>{{username}}</button>
+  <button (click)="logoutClick()" mat-menu-item>Log Out</button>
+</mat-menu>

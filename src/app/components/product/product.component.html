@@ -1,17 +1,415 @@
-<div class="h2 bg-dark" *ngIf="productDetail">{{productDetail.name}}</div>
-<div  class="card flex-row flex-wrap">
-  <div class="card-header border-0">
-    <img src="//placehold.it/200" alt="">
-  </div>
-  <div class="card-block px-2">
-    <h4 class="card-title">{{productDetail.name}}</h4>
-    <p class="card-text">{{productDetail.about}}</p>
-    <p class="card-text">{{productDetail.price}}</p>
-    <a href="#" class="btn btn-primary">Add to Cart</a>
-  </div>
-  <div class="w-100"></div>
-  <div class="card-footer w-100 text-muted">
-    Footer stating cats are CUTE little animals
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      {{productDetail.item.brand}} {{productDetail.item.model}}
+    </div>
+    <div class="card-body row">
+      <div class="col-sm-6 w-50">
+        <ngb-carousel>
+          <ng-template ngbSlide *ngFor="let image of productDetail.item.images">
+            <img class="w-100" [src]="image" alt="Random first slide">
+            <div class="carousel-caption">
+            </div>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+      <div class="col-sm-6 w-50">
+        <div class="row">
+          <div class="col w-25">
+            Brand:
+          </div>
+          <div class="col w-75">
+            {{productDetail.item.brand}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col w-25">
+            Model:
+          </div>
+          <div class="col w-75">
+            {{productDetail.item.model}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col w-25">
+            About:
+          </div>
+          <div class="col w-75">
+            {{productDetail.item.about}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col w-25">
+            Price:
+          </div>
+          <div class="col w-75">
+            {{productDetail.item.price}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div [ngSwitch]="productDetail.item.category" class="card-body">
+      <table *ngSwitchCase="'Smartphones'" class="table">
+        <thead>
+        <tr>
+          <th scope="col">Parameters</th>
+          <th scope="col"></th>
+        </tr>
+        <tr data-toggle="collapse" data-target="#power">
+          <th scope="col">Power</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="power">
+        <tr>
+          <td>Processor</td>
+          <td>{{productDetail.item.processor}}</td>
+        </tr>
+        <tr>
+          <td>Count of Cores</td>
+          <td>{{productDetail.item.countCpuCores}}</td>
+        </tr>
+        <tr>
+          <td>Frequency</td>
+          <td>{{productDetail.item.cpuFrequency}}</td>
+        </tr>
+        <tr>
+          <td>Operating Memory</td>
+          <td>{{productDetail.item.operatingMemory}}</td>
+        </tr>
+        <tr>
+          <td>Graphis</td>
+          <td>{{productDetail.item.graphis}}</td>
+        </tr>
+        <tr>
+          <td>Memory</td>
+          <td>{{productDetail.item.memory}}</td>
+        </tr>
+        </tbody>
+        <thead>
+        <tr data-toggle="collapse" data-target="#battery">
+          <th scope="col">Battery</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="battery">
+        <tr>
+          <td>Capacity</td>
+          <td>{{productDetail.item.batteryCapacity}}</td>
+        </tr>
+        <tr>
+          <td>User battery change</td>
+          <td>{{productDetail.item.userBatteryChange}}</td>
+        </tr>
+        <tr>
+          <td>Charge Power</td>
+          <td>{{productDetail.item.chargePower}}</td>
+        </tr>
+        <tr>
+          <td>Charge Time</td>
+          <td>{{productDetail.item.chargeTime}}</td>
+        </tr>
+        </tbody>
+        <thead>
+        <tr data-toggle="collapse" data-target="#communication">
+          <th scope="col">Communication</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="communication">
+        <tr>
+          <td>Wifi</td>
+          <td>{{productDetail.item.wifi}}</td>
+        </tr>
+        <tr>
+          <td>Wifi Type</td>
+          <td>{{productDetail.item.wifitype}}</td>
+        </tr>
+        <tr>
+          <td>Bluetooth</td>
+          <td>{{productDetail.item.bluetooth}}</td>
+        </tr>
+        <tr>
+          <td>Bluetooth Type</td>
+          <td>{{productDetail.item.bluetoothtype}}</td>
+        </tr>
+        <tr>
+          <td>GPS</td>
+          <td>{{productDetail.item.gps}}</td>
+        </tr>
+        <tr>
+          <td>NFC</td>
+          <td>{{productDetail.item.nfc}}</td>
+        </tr>
+        <tr>
+          <td>Sensors</td>
+          <td>{{productDetail.item.sensors}}</td>
+        </tr>
+        </tbody>
+        <thead>
+        <tr data-toggle="collapse" data-target="#connectors">
+          <th scope="col">Connectors</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="connectors">
+        <tr>
+          <td>USB</td>
+          <td>{{productDetail.item.usb}}</td>
+        </tr>
+        <tr>
+          <td>USB Type</td>
+          <td>{{productDetail.item.usbType}}</td>
+        </tr>
+        <tr>
+          <td>Jack</td>
+          <td>{{productDetail.item.jack}}</td>
+        </tr>
+        <tr>
+          <td>SimCard</td>
+          <td>{{productDetail.item.simCard}}</td>
+        </tr>
+        <tr>
+          <td>SimCard Type</td>
+          <td>{{productDetail.item.simType}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <table class="table" *ngSwitchCase="'PCs'">
+        <thead>
+          <tr>
+            <th scope="col">Parameters</th>
+            <th scope="col"></th>
+          </tr>
+          <tr data-toggle="collapse" data-target="#processor">
+            <th scope="col">Processor</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody class="collapse" id="processor">
+        <tr>
+          <td>Rad</td>
+          <td>{{productDetail.item.rad}}</td>
+        </tr>
+        <tr>
+          <td>Model</td>
+          <td>{{productDetail.item.modelProc}}</td>
+        </tr>
+        <tr>
+          <td>Frekvencia</td>
+          <td>{{productDetail.item.frekvencia}}</td>
+        </tr>
+        <tr>
+          <td>Pocet Jadier</td>
+          <td>{{productDetail.item.pocetJadier}}</td>
+        </tr>
+        <tr>
+          <td>Cache</td>
+          <td>{{productDetail.item.cache}}</td>
+        </tr>
+        <tr>
+          <td>Boots</td>
+          <td>{{productDetail.item.boost}}</td>
+        </tr>
+        <tr>
+          <td>TDP</td>
+          <td>{{productDetail.item.TDP}}</td>
+        </tr>
+        </tbody>
+        <thead data-toggle="collapse" data-target="#graphispc">
+        <tr>
+          <th scope="col">Graphis Card</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="graphispc">
+        <tr>
+          <td>Model</td>
+          <td>{{productDetail.item.modelGraphis}}</td>
+        </tr>
+        <tr>
+          <td>Streamovacie procesory</td>
+          <td>{{productDetail.item.streamProc}}</td>
+        </tr>
+        <tr>
+          <td>Pamäť</td>
+          <td>{{productDetail.item.memory}}</td>
+        </tr>
+        </tbody>
+        <thead data-toggle="collapse" data-target="#motherboard">
+        <tr>
+          <th scope="col">Motherboard</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="motherboard">
+        <tr>
+          <td>Model</td>
+          <td>{{productDetail.item.modelOfBoard}}</td>
+        </tr>
+        <tr>
+          <td>Socket</td>
+          <td>{{productDetail.item.socket}}</td>
+        </tr>
+        </tbody>
+        <thead data-toggle="collapse" data-target="#disk">
+        <tr>
+          <th scope="col">Disk</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="disk">
+        <tr>
+          <td>Brand</td>
+          <td>{{productDetail.item.brandofdisk}}</td>
+        </tr>
+        <tr>
+          <td>Type</td>
+          <td>{{productDetail.item.diskType}}</td>
+        </tr>
+        <tr>
+          <td>Size</td>
+          <td>{{productDetail.item.diskSize}}</td>
+        </tr>
+        </tbody>
+        <thead data-toggle="collapse" data-target="#moreinfo">
+        <tr>
+          <th scope="col">More Info</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="moreinfo">
+        <tr>
+          <td>Size</td>
+          <td>{{productDetail.item.sizeOfPC}}</td>
+        </tr>
+        <tr>
+          <td>Weight</td>
+          <td>{{productDetail.item.weight}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <table class="table" *ngSwitchCase="'Monitors'">
+        <thead>
+        <tr>
+          <th scope="col">Parameters</th>
+          <th scope="col"></th>
+        </tr>
+        <tr data-toggle="collapse" data-target="#rozlisenie">
+          <th scope="col">Rozlíšenie</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="rozlisenie">
+        <tr>
+          <td>Rozlíšenie</td>
+          <td>{{productDetail.item.rozlisenie}}</td>
+        </tr>
+        <tr>
+          <td>Typ Rozlíšenia</td>
+          <td>{{productDetail.item.typrozlisenia}}</td>
+        </tr>
+        <tr>
+          <td>Uhlopriečka</td>
+          <td>{{productDetail.item.uhlopriecka}}</td>
+        </tr>
+        </tbody>
+        <thead data-toggle="collapse" data-target="#Obrazovka">
+        <tr>
+          <th scope="col">Obrazovka</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="Obrazovka">
+        <tr>
+          <td>Display</td>
+          <td>{{productDetail.item.displej}}</td>
+        </tr>
+        <tr>
+          <td>Obnovovacia Frekvencia</td>
+          <td>{{productDetail.item.obnovovaciaFrekvencia}}</td>
+        </tr>
+        <tr>
+          <td>Odozva</td>
+          <td>{{productDetail.item.odozva}}</td>
+        </tr>
+        <tr>
+          <td>Jas</td>
+          <td>{{productDetail.item.jas}}</td>
+        </tr>
+        <tr>
+          <td>Kontrast</td>
+          <td>{{productDetail.item.kontrast}}</td>
+        </tr>
+        <tr>
+          <td>Pomer Strán</td>
+          <td>{{productDetail.item.pomerStran}}</td>
+        </tr>
+        <tr>
+          <td>Povrch Displeja</td>
+          <td>{{productDetail.item.povrchDispleja}}</td>
+        </tr>
+        <tr>
+          <td>Konštrukcia</td>
+          <td>{{productDetail.item.konstrukcia}}</td>
+        </tr>
+        </tbody>
+        <thead data-toggle="collapse" data-target="#porty">
+        <tr>
+          <th scope="col">Porty</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="porty">
+        <tr>
+          <td>Porty</td>
+          <td>{{productDetail.item.porty}}</td>
+        </tr>
+        </tbody>
+        <thead data-toggle="collapse" data-target="#vlastnosti">
+        <tr>
+          <th scope="col">Vlastnosti</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="vlastnosti">
+        <tr>
+          <td>Vlastnosti</td>
+          <td>{{productDetail.item.vlastnosti}}</td>
+        </tr>
+        <tr>
+          <td>Funkcie</td>
+          <td>{{productDetail.item.funkcie}}</td>
+        </tr>
+        </tbody>
+        <thead data-toggle="collapse" data-target="#rozmery">
+        <tr>
+          <th scope="col">Rozmery</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody class="collapse" id="rozmery">
+        <tr>
+          <td>Sirka</td>
+          <td>{{productDetail.item.sirka}}</td>
+        </tr>
+        <tr>
+          <td>Vyska</td>
+          <td>{{productDetail.item.vyska}}</td>
+        </tr>
+        <tr>
+          <td>Hlbka</td>
+          <td>{{productDetail.item.hlbka}}</td>
+        </tr>
+        <tr>
+          <td>Hmotnost</td>
+          <td>{{productDetail.item.hmotnost}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="canUpdate" class="card-footer">
+      <div class="btn btn-warning">Update Product Info</div>
+    </div>
   </div>
 </div>
-

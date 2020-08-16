@@ -1,0 +1,34 @@
+export class MonitorModel {
+  // Basic
+  id: number;
+  category: string;
+  brand: string;
+  model: string;
+  about: string;
+  price: string;
+  // Rozlisenie
+  uhlopriecka: string;
+  rozlisenie: string;
+  typrozlisenia: string;
+  // Obrazovka
+  displej: string;
+  obnovovaciaFrekvencia: string;
+  odozva: string;
+  jas: string;
+  kontrast: string;
+  pomerStran: string;
+  povrchDispleja: string;
+  konstrukcia: string;
+  // Pripojenie
+  porty: string;
+  // Vlastnosti
+  vlastnosti: string;
+  funkcie: string;
+  // Rozmery
+  sirka: string;
+  vyska: string;
+  hlbka: string;
+  hmotnost: string;
+  // Obrazky
+  images: Array<string>;
+}

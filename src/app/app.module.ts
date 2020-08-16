@@ -21,14 +21,35 @@ import { UpdateUserInfoComponent } from './components/update-user-info/update-us
 import { EnterPageComponent } from './components/enter-page/enter-page.component';
 import { ProductComponent } from './components/product/product.component';
 import { ModalWarningComponent } from './components/modal-warning/modal-warning.component';
-import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SidenavItemsComponent } from './components/sidenav-items/sidenav-items.component';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CarouselModule} from 'ngx-owl-carousel-o';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatListModule} from '@angular/material/list';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
+import { SearchItemComponent } from './components/search-item/search-item.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import { DialogComponent } from './components/dialog/dialog.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 const routes: Routes = [{path: 'user', component: UserComponent,
   children: [{path: 'updateUser', component: UpdateUserInfoComponent}]},
   {path: 'login', component: LoginComponent},
   {path: 'additem', component: AddItemFormComponent},
-  {path: 'products', component: ProductsComponent},
-  {path: 'products/:productid', component: ProductComponent},
+  {path: 'products', component: SidenavItemsComponent,
+  children: [{path: ':category', component: ProductsComponent},
+    {path: ':category/:subcategory', component: ProductsComponent},
+    {path: ':category/:subcategory/:item', component: ProductComponent}]},
   {path: 'register', component: RegisterComponent},
   {path: 'cart', component: ShopcartComponent},
   {path: 'enter', component: EnterPageComponent},
@@ -48,17 +69,50 @@ const routes: Routes = [{path: 'user', component: UserComponent,
     UpdateUserInfoComponent,
     EnterPageComponent,
     ProductComponent,
-    ModalWarningComponent
+    ModalWarningComponent,
+    SidenavItemsComponent,
+    SearchItemComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     AngularFireAuthModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     FormsModule,
-    NgbModule.forRoot()
+    BrowserAnimationsModule,
+    CarouselModule,
+    MatSliderModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatListModule,
+    MatProgressBarModule,
+    NgbCarouselModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule,
+    _MatMenuDirectivesModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSnackBarModule
+  ],
+  exports: [
+    MatSliderModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatListModule,
+    MatProgressBarModule,
+    NgbCarouselModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   entryComponents: [
     ProductsComponent,
@@ -70,7 +124,8 @@ const routes: Routes = [{path: 'user', component: UserComponent,
     UpdateUserInfoComponent,
     EnterPageComponent,
     ProductComponent,
-    ModalWarningComponent
+    ModalWarningComponent,
+    SearchItemComponent
   ],
   providers: [
     AddItemFormComponent,

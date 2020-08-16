@@ -8,7 +8,6 @@ import {ShopingcartService} from '../../services/shopingcart.service';
 })
 export class ShopcartComponent implements OnInit {
   constructor(private getItems: ShopingcartService) {
-    console.log(getItems.shopCartItemsArray);
   }
 
   ngOnInit() {
