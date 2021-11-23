@@ -1,47 +1,46 @@
 .card-columns {
-  width: 80vw;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 7vh;
-  column-count: 4;
+  column-count: 5;
 }
-
-.card{
-  color: white;
-  transition: all 1s ease;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-.card-front, .card-back{
-  backface-visibility: hidden;
-}
-.card-back{
-  transform: rotateY(180deg);
-}
-
-.card:hover{
-  transform: rotateY(180deg);
-}
-
-.card-header{
-  text-align: center;
-}
-
 .add_cart_button{
   margin-bottom: 2vh;
   margin-left: 2vw;
 }
-
-.main{
-  width: 80vw;
-  height: 80vh;
-  margin-left: auto;
-  margin-right: auto;
-  overflow-y: auto;
-  margin-top: 7vh;
+.container{
+  height: 92vh;
+  padding-top: 5vh;
+  z-index: 2;
 }
-
 .main::-webkit-scrollbar{
   display: none;
 }
-
+.smartphones{
+  background-color: #1C8ADB;
+}
+.pcs{
+  background-color: deepskyblue;
+}
+.monitors{
+  background-color: steelblue;
+}
+.noitems{
+  margin-top: 25vh;
+  border-radius: 1vw;
+}
+.noitemsinfo{
+  border-radius: 1vw;
+}
+.container-fluid{
+  height: 75vh;
+  overflow: auto;
+  padding-top: 15px;
+  border: 0.25vw solid steelblue !important;
+  border-radius: 0.5vw;
+}
+.container-fluid::-webkit-scrollbar{
+  display: none;
+}
+.h2{
+  padding-left: 15px;
+  border: 0.25vw solid steelblue !important;
+  border-radius: 0.5vw;
+}

@@ -1,10 +1,29 @@
 <h2 matDialogTitle>Search</h2>
 <mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Search</mat-label>
-    <input (keydown)="dataitem.searchItems($event, category)" matInput type="search">
+  <mat-form-field color="accent" appearance="outline">
+    <mat-label>Search By</mat-label>
+    <mat-select [(ngModel)]="searchCat">
+      <mat-option value="category">Category</mat-option>
+      <mat-option value="brand">Brand</mat-option>
+      <mat-option value="model">Model</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-label>Price</mat-label>
+  <br>
+  <mat-slider min="0"
+              [max]="5000"
+              step="25"
+              thumbLabel="true"
+              [(ngModel)]="priceForFind">
+  </mat-slider>
+  <br>
+  <mat-form-field color="accent" appearance="fill">
+    <mat-label>Input</mat-label>
+    <input matInput [(ngModel)]="searchText">
   </mat-form-field>
   <mat-dialog-actions>
-    <button mat-stroked-button (click)="close()">Close</button>
+    <button mat-stroked-button color="accent" (click)="searchItems(searchText, category, searchCat, priceForFind)">Search</button>
+    <button mat-stroked-button color="warn" (click)="close()">Close</button>
   </mat-dialog-actions>
 </mat-dialog-content>

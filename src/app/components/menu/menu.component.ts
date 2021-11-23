@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {ProductsComponent} from '../products/products.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataServiceService} from '../../services/data-service.service';
-import {AddItemFormComponent} from '../add-item-form/add-item-form.component';
-import {LoginComponent} from '../login/login.component';
-import {RegisterComponent} from '../register/register.component';
 import {AuthService} from '../../services/auth.service';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {first} from 'rxjs/operators';
-import {UserComponent} from '../user/user.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ShopcartComponent} from '../shopcart/shopcart.component';
 import {MatDialog} from '@angular/material/dialog';
 import {SearchItemComponent} from '../search-item/search-item.component';
 
@@ -18,27 +11,27 @@ import {SearchItemComponent} from '../search-item/search-item.component';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
   isLoggin: boolean;
   username: string;
   isAdmin = false;
   canSearch: boolean;
-  canOpenMenu = false;
+  productShow = false;
   constructor(private route: Router,
               private data: DataServiceService,
               private auth: AngularFireAuth,
               private authSer: AuthService,
               private activateroute: ActivatedRoute,
               private dialog: MatDialog) {
-    this.data.canSearchItems.subscribe(value => {
-      this.canSearch = value;
-    });
-    this.data.canOpenSideMenu.subscribe(value => {
-      this.canOpenMenu = value;
-    });
   }
 
   ngOnInit() {
+    this.data.productShow.subscribe(value => {
+      this.productShow = value;
+    });
+    this.data.canSearchItems.subscribe(value => {
+      this.canSearch = value;
+    });
     this.authSer.isLoggin.subscribe(value => {
       this.isLoggin = value;
     });
@@ -50,6 +43,12 @@ export class MenuComponent implements OnInit {
         this.isAdmin = true;
       }
     });
+  }
+  ngOnDestroy(): void {
+    this.data.canSearchItems.unsubscribe();
+    this.authSer.isLoggin.unsubscribe();
+    this.authSer.name.unsubscribe();
+    this.authSer.role.unsubscribe();
   }
   changeComponent(change: number) {
     if (change === 0) {
@@ -64,9 +63,11 @@ export class MenuComponent implements OnInit {
       this.route.navigate(['/user']);
     } else if (change === 5) {
       this.route.navigate(['/cart']);
-    } else {
-      this.dialog.open(SearchItemComponent);
     }
+  }
+  openDialogSearch() {
+    this.dialog.open(SearchItemComponent);
+    this.route.navigate([], { queryParams: { dialog: 'search'}, relativeTo: this.activateroute, replaceUrl: true}).then();
   }
 
   logoutClick() {
@@ -76,5 +77,4 @@ export class MenuComponent implements OnInit {
   openMenu() {
     this.data.isopen.next(true);
   }
-
 }

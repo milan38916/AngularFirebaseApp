@@ -1,31 +1,19 @@
-<div class="main">
-  <div class="h5">Products</div>
-<div class="card-columns">
-  <div class="card bg-dark" *ngFor="let product of items">
-    <div class="card-front">
-      <div class="container h-100 align-middle">
-        <div class="h5 text-center">{{product.item.brand}} {{product.item.model}}</div>
+<div class="container">
+  <div class="h2">Products</div>
+  <div *ngIf="!emptyItems" class="container-fluid">
+    <div class="card-columns">
+      <div [ngClass]="{smartphones: product.category === 'Smartphones', pcs: product.category === 'PCs', monitors: product.category === 'Monitors'}"
+           class="card pl-3 pr-3"
+           *ngFor="let product of items"
+           (click)="itemDetail(product.id, product.model, product.brand, product.category)">
+        <div class="align-middle mt-5 mb-5">
+          <div class="h5 text-center">{{product.brand}} {{product.model}}</div>
+        </div>
       </div>
-    </div>
-    <div class="card-back">
-      <div class="card-header" (click)="itemDetail(product.item.model)" [routerLink]="product.item.model">
-        {{product.item.model}}
-      </div>
-      <div class="card-title">
-        Name: {{product.item.model}}
-      </div>
-      <div class="card-text" *ngIf="product.about">
-        About: {{product.item.about}}
-      </div>
-      <div class="card-text">
-        Price: {{product.item.price}}
-      </div>
-      <button class="add_cart_button" mat-fab color="primary" (click)="addToCart(product.item.model)">
-        <mat-icon>add_shopping_cart</mat-icon>
-      </button>
+      <router-outlet></router-outlet>
     </div>
   </div>
+  <div *ngIf="emptyItems" class="container text-center noitems">
+    <div class="h1 pt-5 pb-5 bg-info noitemsinfo">No items found</div>
+  </div>
 </div>
-</div>
-<ng-container *ngTemplateOutlet="component"></ng-container>
-<router-outlet></router-outlet>

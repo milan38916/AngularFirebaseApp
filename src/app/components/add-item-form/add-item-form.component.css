@@ -1,13 +1,16 @@
 .form-group{
-  width: 65vw;
+  width: 40vw;
   margin-left: auto;
   margin-right: auto;
   color: white;
+  padding-top: 2vh;
+  border-top-left-radius: 1vw;
+  border-top-right-radius: 1vw;
   border-bottom-left-radius: 1vw;
   border-bottom-right-radius: 1vw;
 }
 .h2{
-  width: 65vw;
+  width: 40vw;
   padding-bottom: 1vh;
   padding-top: 2.5vh;
   color: white;
@@ -15,11 +18,14 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0;
+  margin-bottom: 2vh;
   border-top-left-radius: 1vw;
   border-top-right-radius: 1vw;
+  border-bottom-left-radius: 1vw;
+  border-bottom-right-radius: 1vw;
 }
 .form-control{
-  width: 60vw;
+  width: 35vw;
 }
 
 .btn-primary{
@@ -28,7 +34,7 @@
   margin-top: 1vh;
   font-size: 2.25vh;
   position: relative;
-  width: 60vw;
+  width: 35vw;
 }
 
 label{
@@ -41,8 +47,8 @@ legend{
 
 .main{
   padding-top: 7vh;
-  width: 65vw;
-  height: 80vh;
+  width: 40vw;
+  height: 92vh;
   margin-left: auto;
   margin-right: auto;
   overflow-y: auto;
@@ -58,7 +64,7 @@ legend{
   background-size: 20%;
   background-position: center;
   height: 35vh;
-  width: 60vw;
+  width: 35vw;
   margin: 20px auto;
   border: 0.25rem dashed #1C8ADB;
   border-radius: 0.25rem;
@@ -77,11 +83,11 @@ legend{
 }
 
 mat-progress-bar{
-  width: 60vw;
+  width: 35vw;
   margin-top: 2vh;
 }
 
 .form-row{
-  width: 60vw;
+  width: 35vw;
 }
 

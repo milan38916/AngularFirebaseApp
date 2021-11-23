@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {FormBuilder} from '@angular/forms';
@@ -17,7 +17,7 @@ import {MonitorModel} from '../../../models/MonitorModel';
   templateUrl: './add-item-form.component.html',
   styleUrls: ['./add-item-form.component.css']
 })
-export class AddItemFormComponent implements OnInit {
+export class AddItemFormComponent implements OnInit, OnDestroy {
   id: number;
   brand: string;
   model: string;
@@ -227,6 +227,9 @@ export class AddItemFormComponent implements OnInit {
 
   opensnackbar(message: string) {
     this.snackbar.open(message, 'Close', {duration: 10000});
+  }
+
+  ngOnDestroy(): void {
   }
 
 }

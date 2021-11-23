@@ -5,7 +5,7 @@
     fixedInViewport="true">
     <mat-toolbar>Products Menu</mat-toolbar>
     <mat-nav-list>
-      <div *ngFor="let cat of category">
+      <div *ngFor="let cat of categories">
         <a [routerLink]="cat.maincat" mat-list-item (click)="getDataItemByMainCategory(cat.maincat, cat.subcat)">{{cat.maincat}}</a>
         <a [routerLink]="cat.maincat + '/' + subcat" mat-list-item class="subcat" (click)="getDataItemBySubCategory(cat.maincat, subcat)" *ngFor="let subcat of cat.subcat">{{subcat}}</a>
       </div>

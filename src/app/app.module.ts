@@ -41,19 +41,28 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { DialogComponent } from './components/dialog/dialog.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {AuthguardService} from './guards/authguard.service';
+import { NotlogginComponent } from './components/notloggin/notloggin.component';
+import { ModalDetailItemComponent } from './components/modal-detail-item/modal-detail-item.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatRadioModule} from '@angular/material/radio';
+import {ShopingcartService} from './services/shopingcart.service';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const routes: Routes = [{path: 'user', component: UserComponent,
   children: [{path: 'updateUser', component: UpdateUserInfoComponent}]},
   {path: 'login', component: LoginComponent},
-  {path: 'additem', component: AddItemFormComponent},
-  {path: 'products', component: SidenavItemsComponent,
-  children: [{path: ':category', component: ProductsComponent},
-    {path: ':category/:subcategory', component: ProductsComponent},
-    {path: ':category/:subcategory/:item', component: ProductComponent}]},
+  {path: 'additem', component: AddItemFormComponent, canActivate: [AuthguardService]},
   {path: 'register', component: RegisterComponent},
   {path: 'cart', component: ShopcartComponent},
   {path: 'enter', component: EnterPageComponent},
-  {path: '', component: EnterPageComponent}
+  {path: '', component: EnterPageComponent},
+  {path: 'products', component: ProductsComponent, children: [
+    {path: 'search', component: SearchItemComponent}]},
+  {path: 'products/:cat', component: ProductsComponent},
+  {path: 'products/:cat/:subcat', component: ProductsComponent},
+  {path: 'products/:cat/:subcat/:item', component: ProductComponent},
+  {path: 'notloggin', component: NotlogginComponent}
   ];
 
 @NgModule({
@@ -72,36 +81,41 @@ const routes: Routes = [{path: 'user', component: UserComponent,
     ModalWarningComponent,
     SidenavItemsComponent,
     SearchItemComponent,
-    DialogComponent
+    DialogComponent,
+    NotlogginComponent,
+    ModalDetailItemComponent
   ],
-  imports: [
-    BrowserModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    AngularFireAuthModule,
-    RouterModule.forRoot(routes),
-    ReactiveFormsModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    CarouselModule,
-    MatSliderModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatListModule,
-    MatProgressBarModule,
-    NgbCarouselModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatButtonModule,
-    _MatMenuDirectivesModule,
-    MatMenuModule,
-    MatDialogModule,
-    MatInputModule,
-    MatSnackBarModule
-  ],
+    imports: [
+        BrowserModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFirestoreModule,
+        AngularFireStorageModule,
+        AngularFireAuthModule,
+        RouterModule.forRoot(routes),
+        ReactiveFormsModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        CarouselModule,
+        MatSliderModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatListModule,
+        MatProgressBarModule,
+        NgbCarouselModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatButtonModule,
+        _MatMenuDirectivesModule,
+        MatMenuModule,
+        MatDialogModule,
+        MatInputModule,
+        MatSnackBarModule,
+        MatButtonToggleModule,
+        MatRadioModule,
+        MatTooltipModule
+    ],
   exports: [
     MatSliderModule,
     MatSidenavModule,

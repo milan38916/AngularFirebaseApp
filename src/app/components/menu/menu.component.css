@@ -3,8 +3,11 @@
 }
 mat-icon{
   color: white;
-  margin-right: 2vw;
 }
 .spacer{
   flex: 1 1 auto;
+}
+
+mat-toolbar{
+  height: 8vh;
 }

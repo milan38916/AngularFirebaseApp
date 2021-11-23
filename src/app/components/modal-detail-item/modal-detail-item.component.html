@@ -1,0 +1,27 @@
+<div (click)="closeDialog()" class="float-right mb-2"><mat-icon>clear</mat-icon></div>
+<div *ngIf="canShow" class="h2 float-right w-100 text-center mb-4">{{itemDetail.item.brand}} {{itemDetail.item.model}}</div>
+<div class="row">
+  <div class="col">
+    <ngb-carousel class="w-100">
+      <ng-template ngbSlide *ngFor="let image of itemDetail.item.images">
+        <img class="w-100" [src]="image" alt="images of product">
+        <div class="carousel-caption"></div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <div class="col">
+    <ul class="list-group">
+      <li class="list-group-item bg-success">Category: {{itemDetail.item.category}}</li>
+      <li class="list-group-item bg-primary">Brand: {{itemDetail.item.brand}}</li>
+      <li class="list-group-item bg-primary">Model: {{itemDetail.item.model}}</li>
+      <li class="list-group-item bg-primary">About: {{itemDetail.item.about}}</li>
+      <li class="list-group-item bg-primary">Price: {{itemDetail.item.price}}</li>
+    </ul>
+    <button (click)="showMoreDetails(data.model, data.brand, data.type)" mat-fab class="float-right mt-3" color="warn">
+      <mat-icon>details</mat-icon>
+    </button>
+    <button (click)="addItemToCart(data.model, data.brand, data.type)" mat-fab class="float-right mt-3 mr-2" color="accent">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </div>
+</div>

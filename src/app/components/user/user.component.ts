@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {first} from 'rxjs/operators';
+import {DataServiceService} from '../../services/data-service.service';
 
 @Component({
   selector: 'app-user',
@@ -12,7 +13,8 @@ export class UserComponent implements OnInit {
   email;
   UID;
   displayname;
-  constructor(private user: AngularFireAuth) {
+  updatingUser = false;
+  constructor(private user: AngularFireAuth, private data: DataServiceService) {
   }
 
   ngOnInit() {
@@ -25,6 +27,10 @@ export class UserComponent implements OnInit {
     this.email = this.currentUser.email;
     this.UID = this.currentUser.uid;
     this.displayname = this.currentUser.displayName;
+  }
+  updatingUserActivate() {
+    this.updatingUser = true;
+    this.data.updateUserAnim.next(true);
   }
 
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DataServiceService} from '../../services/data-service.service';
 import {ShopingcartService} from '../../services/shopingcart.service';
@@ -14,14 +14,12 @@ import {map} from 'rxjs/operators';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit, AfterViewInit {
+export class ProductComponent implements OnInit, OnDestroy {
   loading = false;
   canUpdate = false;
   name: string;
   productDetail: any;
   mySlideImages: any;
-  myCarouselImages = [];
-  getData: any;
 
   mySlideOptions = {items: 1, dots: true, nav: true};
   myCarouselOptions = {items: 3, dots: true, nav: true};
@@ -30,9 +28,11 @@ export class ProductComponent implements OnInit, AfterViewInit {
               private fireData: AngularFireDatabase,
               private route: ActivatedRoute,
               private auth: AuthService) {
-    this.data.getDetailItem(route.snapshot.paramMap.get('category'),
-      route.snapshot.paramMap.get('subcategory'),
-      route.snapshot.paramMap.get('item'));
+  }
+  ngOnInit() {
+    this.data.getDetailItem(this.route.snapshot.paramMap.get('cat'),
+      this.route.snapshot.paramMap.get('subcat'),
+      this.route.snapshot.paramMap.get('item'));
     this.data.getDetailData.subscribe(value => {
       console.log(value);
       this.productDetail = value;
@@ -42,10 +42,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngOnInit() {
+  ngOnDestroy(): void {
   }
 
-  ngAfterViewInit(): void {
-  }
 
 }

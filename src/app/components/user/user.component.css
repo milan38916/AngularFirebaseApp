@@ -1,15 +1,30 @@
+.container-fluid{
+  height: 92vh;
+  padding-top: 30vh;
+}
+.updatingUser{
+  width: 50vw;
+  float: right;
+  transition: all linear 1s;
+}
+.h1{
+  width: 35vw;
+  border-radius: 1vw;
+}
+
 .card{
-  width: max-content;
+  width: 35vw;
   color: white;
   margin-left: auto;
   margin-right: auto;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
   border-bottom-right-radius: 1vw;
   border-bottom-left-radius: 1vw;
   border-top-left-radius: 1vw;
   border-top-right-radius: 1vw;
-margin-top: 10vh;
+}
+.btn{
+  border-bottom-right-radius: 1vw;
+  border-bottom-left-radius: 1vw;
 }
 .table{
   color: white;

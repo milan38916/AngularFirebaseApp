@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
+import {DataServiceService} from '../../services/data-service.service';
 
 @Component({
   selector: 'app-update-user-info',
@@ -11,10 +12,14 @@ export class UpdateUserInfoComponent implements OnInit {
 
   displayname;
   user;
-  constructor(private route: Router) {
+  showComponent = false;
+  constructor(private route: Router, private data: DataServiceService) {
   }
 
   ngOnInit() {
+    this.data.updateUserAnim.subscribe(value => {
+      this.showComponent = value;
+    });
   }
 
   updateInfoAboutUser(name: string) {

@@ -1,3 +1,5 @@
+<div [ngClass]="{updatingUser: updatingUser === true}" class="container-fluid bg-primary">
+  <div class="h1 bg-info text-center ml-auto mr-auto">User Info</div>
 <div class="card bg-dark">
   <div class="card-header h2">Current User</div>
   <table class="table">
@@ -14,7 +16,8 @@
       </tr>
     </tbody>
     </table>
-  <div routerLink="updateUser" class="btn btn-warning">Update</div>
+  <div routerLink="updateUser" class="btn btn-warning" (click)="updatingUserActivate()">Update</div>
+</div>
 </div>
 <router-outlet></router-outlet>
 

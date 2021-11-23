@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {ProductsComponent} from '../components/products/products.component';
 import {from, Observable, Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {map} from 'rxjs/operators';
@@ -8,21 +7,25 @@ import * as firebase from 'firebase';
 import UploadTask = firebase.storage.UploadTask;
 import TaskEvent = firebase.storage.TaskEvent;
 import {AngularFireDatabase} from '@angular/fire/database';
-import set = Reflect.set;
 import {Product} from '../../models/Product';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../components/dialog/dialog.component';
+import {BasicDataModel} from '../../models/BasicData.model';
 @Injectable({
   providedIn: 'root'
 })
 export class DataServiceService {
+  detailName: string;
+  detailBrand: string;
+  detailCategory: string;
   component = new Subject<any>();
   itemName = new Subject<string>();
   isopen = new Subject<boolean>();
-  categories = new Subject<any>();
+  categoriesForMenu = new Subject<any>();
+  categoriesForData = new Subject<any>();
+  categoriesForSearch = new Subject<any>();
   subcategories = new Subject<any>();
   canSearchItems = new Subject<boolean>();
-  canOpenSideMenu = new Subject<boolean>();
   searchvalueA: string;
   searchvalueB: string;
   findValues = new Subject<any>();
@@ -32,6 +35,10 @@ export class DataServiceService {
   getMainData = new Array<any>();
   getDetailData = new Subject<any>();
   uploadProgress = new Subject<number>();
+  productShow = new Subject<boolean>();
+  isItemFind = false;
+  isFindItemSub = new Subject<boolean>();
+  updateUserAnim = new Subject<boolean>();
   constructor(private db: AngularFirestore,
               private realTimeDatabase: AngularFireDatabase,
               private dialog: MatDialog) {
@@ -40,67 +47,105 @@ export class DataServiceService {
     this.component.next(component);
   }
   getDetailItem(cat, subcat, item) {
-    console.log(cat);
+    console.log('detail get from service: ' + cat + ' ' + subcat + ' ' + item);
     this.realTimeDatabase.object('products/' + cat + '/' + subcat + '/' + item).valueChanges().subscribe(value => {
+      console.log('detail from service: ' + value);
       this.getDetailData.next(value);
     });
   }
-  getAllData(category) {
+  getAllData(category, startLog) {
+    console.log('getAlllData are activated: ' + startLog);
     this.getMainData = new Array<any>();
     let i;
     let j;
+    let product;
     for (i = 0; i < category.length; i++) {
       for (j = 0; j < category[i].subcat.length; j++) {
         this.realTimeDatabase.list('products/' + category[i].maincat + '/' + category[i].subcat[j]).valueChanges().subscribe(value => {
-          this.getMainData = this.getMainData.concat(value);
-          this.getCatData.next(this.getMainData);
+          product = value;
+          for (const item of product) {
+            product = new BasicDataModel(item.item.id, item.item.category, item.item.brand, item.item.model);
+            this.getCatData.next(product);
+          }
         });
       }
     }
+    this.isFindItemSub.next(false);
   }
   getDataBySubCategory(maincat, subcat) {
+    let sendItemData;
+    let product;
     this.realTimeDatabase.list('products/' + maincat + '/' + subcat).valueChanges().subscribe(value => {
-      this.getCatData.next(value);
+      product = value;
+      for (const item of product) {
+        sendItemData = new BasicDataModel(item.item.id, item.item.category, item.item.brand, item.item.model);
+        this.getCatData.next(sendItemData);
+      }
     });
+    this.isFindItemSub.next(false);
   }
   getDataByMainCategory(maincat, submain) {
+    let sendItemData;
+    let product;
     this.getMainData = new Array<any>();
     let i;
     for (i = 0; i < submain.length; i++) {
       this.realTimeDatabase.list('products/' + maincat + '/' + submain[i]).valueChanges().subscribe(value => {
-        this.getMainData = this.getMainData.concat(value);
-        this.getCatData.next(this.getMainData);
+        product = value;
+        for (const item of product) {
+          sendItemData = new BasicDataModel(item.item.id, item.item.category, item.item.brand, item.item.model);
+          this.getCatData.next(sendItemData);
+        }
       });
     }
+    this.isFindItemSub.next(false);
   }
-  searchItems($event, category) {
-    this.searchvalueA = $event.target.value;
-    this.searchvalueB = $event.target.value + '\uf8ff';
-/*    this.findValues.next(this.db.collection('products').doc('Smartphones').
-    collection('Apple', ref => ref.orderBy('model').limit(4).startAt(this.searchvalueA).endAt(this.searchvalueB)).valueChanges());*/
+  searchItems(searchText, category, findBy, price) {
+    let getItem;
     this.getMainData = new Array<any>();
     let i;
     let j;
+    let sendItemData;
     for (i = 0; i < category.length; i++) {
       for (j = 0; j < category[i].subcat.length; j++) {
         this.realTimeDatabase.list('products/' + category[i].maincat + '/' + category[i].subcat[j],
-          ref => ref.orderByChild('model').
-          limitToLast(100).
-          startAt(this.searchvalueA).
-          endAt(this.searchvalueB)).
+          ref => ref.orderByKey().
+          limitToLast(50)).
         valueChanges().
         subscribe(value => {
-          this.getMainData = this.getMainData.concat(value);
-          this.findValues.next(this.getMainData);
-          console.log('search: ' + this.getMainData);
+          getItem = value;
+          for (const item of getItem) {
+              if (findBy === 'brand') {
+                if (item.item.brand.includes(searchText) && item.item.price <= price) {
+                  sendItemData = new BasicDataModel(item.item.id, item.item.category, item.item.brand, item.item.model);
+                  this.findValues.next(sendItemData);
+                  this.isItemFind = true;
+                }
+              } else if (findBy === 'category') {
+                if (item.item.category.includes(searchText)  && item.item.price <= price) {
+                  sendItemData = new BasicDataModel(item.item.id, item.item.category, item.item.brand, item.item.model);
+                  this.findValues.next(sendItemData);
+                  this.isItemFind = true;
+                }
+              } else if (findBy === 'model') {
+                if (item.item.model.includes(searchText)  && item.item.price <= price) {
+                  sendItemData = new BasicDataModel(item.item.id, item.item.category, item.item.brand, item.item.model);
+                  this.findValues.next(sendItemData);
+                  this.isItemFind = true;
+                }
+              }
+          }
         });
       }
     }
-  }
-  getSubCategory(name: string) {
-    this.realTimeDatabase.list('products/' + name).snapshotChanges().subscribe(value => {
-      this.subcategories.next(value);
-    });
+    if (!this.isItemFind) {
+      this.getDetailData.next([]);
+      this.findValues.next(this.getMainData);
+      this.isFindItemSub.next(true);
+    } else {
+      this.isItemFind = false;
+      this.isFindItemSub.next(false);
+    }
   }
   getItemBySearch() {
     return this.db.collection('products').doc('Smartphones').
@@ -119,11 +164,6 @@ export class DataServiceService {
       });
     });
   }
-  getMainCategories() {
-    this.realTimeDatabase.list('products').snapshotChanges().subscribe(value => {
-      this.categories.next(value);
-    });
-  }
   addItem(product: Product) {
     this.realTimeDatabase.database.ref('products/' + product.category + '/' + product.brand + '/' + product.model).set({
       item: product
@@ -133,9 +173,15 @@ export class DataServiceService {
       this.dialog.open(DialogComponent, {data: {action: 'Error'}});
     });
   }
-  getCat() {
+  getCat(use: string) {
     firebase.database().ref('products').once('value').then(value => {
-      this.categories.next(value);
+      if (use === 'menu') {
+        this.categoriesForMenu.next(value);
+      } else if (use === 'data') {
+        this.categoriesForData.next(value);
+      } else if (use === 'search') {
+        this.categoriesForSearch.next(value);
+      }
     });
   }
 }

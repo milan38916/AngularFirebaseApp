@@ -1,0 +1,8 @@
+.col{
+  max-height: 60vh;
+  max-width: 40vw;
+  min-width: 20vw;
+}
+div::-webkit-scrollbar{
+  display: none;
+}

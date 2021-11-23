@@ -1,10 +1,9 @@
 .h2{
   background-color: rgb(52, 58, 64);
   text-align: center;
-  width: 65vw;
+  width: 35vw;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 10vh;
   color: white;
   margin-bottom: 0;
   padding-bottom: 1vh;
@@ -12,8 +11,12 @@
   border-top-left-radius: 1vw;
   border-top-right-radius: 1vw;
 }
+.h1{
+  width: 35vw;
+  border-radius: 1vw;
+}
 .form-group{
-  width: 65vw;
+  width: 35vw;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 10vh;
@@ -24,13 +27,19 @@
   border-bottom-right-radius: 1vw;
 }
 .form-control{
-  width: 60vw;
+  width: 30vw;
 }
 .btn{
   margin-left: 2.5vw;
   margin-top: 1vh;
-  width: 15vw;
+  width: 5vw;
 }
 label{
   margin-left: 2.5vw;
+}
+.container-fluid{
+  width: 50vw;
+  float: left;
+  padding-top: 30vh;
+  height: 92vh;
 }

@@ -1,10 +1,13 @@
+.container-fluid{
+  height: 92vh;
+  padding-top: 25vh;
+}
 .h2{
   background-color: rgb(52, 58, 64);
   text-align: center;
   width: 35vw;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 10vh;
   color: white;
   margin-bottom: 0;
   padding-bottom: 1vh;
