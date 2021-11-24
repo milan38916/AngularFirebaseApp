@@ -46,7 +46,7 @@ export class SearchItemComponent implements OnInit, OnDestroy {
       this.activateRoute.snapshot.queryParams.searchToMaxPrice === undefined) {
       this.router.navigate([]).then();
     }
-    this.dataitem.categoriesForData.unsubscribe();
+    //this.dataitem.categoriesForData.unsubscribe();
   }
   searchItems(searchText, category, searchCat, priceForFind) {
     this.dataitem.searchItems(searchText, category, searchCat, priceForFind);

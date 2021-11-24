@@ -1,6 +1,25 @@
 .container-fluid::-webkit-scrollbar{
   display: none;
 }
+
+
+.container-fluid {
+  height: 95vh;
+}
+
+
+
 .card{
   color: black;
+  width: 50%;
+  height: 60vh;
+  margin: 15vh auto;
+}
+
+.table {
+  overflow: scroll;
+  max-height: 20vh;
+}
+.table::-webkit-scrollbar{
+  display: none;
 }

@@ -39,6 +39,7 @@ export class DataServiceService {
   isItemFind = false;
   isFindItemSub = new Subject<boolean>();
   updateUserAnim = new Subject<boolean>();
+  refreshData = new Subject<String>();
   constructor(private db: AngularFirestore,
               private realTimeDatabase: AngularFireDatabase,
               private dialog: MatDialog) {
@@ -59,6 +60,7 @@ export class DataServiceService {
     let i;
     let j;
     let product;
+    this.refreshData.next("refresh");
     for (i = 0; i < category.length; i++) {
       for (j = 0; j < category[i].subcat.length; j++) {
         this.realTimeDatabase.list('products/' + category[i].maincat + '/' + category[i].subcat[j]).valueChanges().subscribe(value => {
@@ -75,6 +77,7 @@ export class DataServiceService {
   getDataBySubCategory(maincat, subcat) {
     let sendItemData;
     let product;
+    this.refreshData.next("refresh");
     this.realTimeDatabase.list('products/' + maincat + '/' + subcat).valueChanges().subscribe(value => {
       product = value;
       for (const item of product) {
@@ -89,6 +92,7 @@ export class DataServiceService {
     let product;
     this.getMainData = new Array<any>();
     let i;
+    this.refreshData.next("refresh");
     for (i = 0; i < submain.length; i++) {
       this.realTimeDatabase.list('products/' + maincat + '/' + submain[i]).valueChanges().subscribe(value => {
         product = value;
@@ -106,6 +110,7 @@ export class DataServiceService {
     let i;
     let j;
     let sendItemData;
+    this.refreshData.next("refresh");
     for (i = 0; i < category.length; i++) {
       for (j = 0; j < category[i].subcat.length; j++) {
         this.realTimeDatabase.list('products/' + category[i].maincat + '/' + category[i].subcat[j],

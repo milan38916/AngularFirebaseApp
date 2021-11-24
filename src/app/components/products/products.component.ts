@@ -58,6 +58,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
     this.data.productShow.next(true);
     this.data.canSearchItems.next(true);
+    this.data.refreshData.subscribe(value => {
+      this.items.length = 0;
+    });
     this.data.getCatData.subscribe(value => {
       this.items.push(value);
       console.log('velkost pola je: ' + this.items.length);
