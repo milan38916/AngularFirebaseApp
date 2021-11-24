@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   category = new Array<CategoryModel>();
   emptyItems = false;
   categoryData: any;
+  dataVisible = false;
   constructor(private auth: AngularFireAuth,
               private data: DataServiceService,
               private getItem: ShopingcartService,
@@ -35,13 +36,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('products is destroy');
+    this.items.length = 0;
     this.data.canSearchItems.next(false);
   }
   ngOnInit() {
-    this.items = new Array<BasicDataModel>();
-    console.log('product is ngonit');
-    this.data.getCat('data');
+    this.items.length = 0;
+    this.data.refreshData.subscribe(value => {
+      this.items.length = 0;
+    });
+    this.data.isDataLoad.subscribe(value => {
+      this.dataVisible = value;
+    });
     this.data.categoriesForData.subscribe(value => {
       this.categoryData = value.toJSON();
       Object.keys(this.categoryData).map(value1 => {
@@ -50,24 +55,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.oneCategory.subcat = Object.keys(this.categoryData[value1]);
         this.category.push(this.oneCategory);
       });
-      this.data.getAllData(this.category, 'start from products');
-      console.log('data are activated');
     });
     this.data.isFindItemSub.subscribe(value => {
       this.emptyItems = value;
     });
     this.data.productShow.next(true);
     this.data.canSearchItems.next(true);
-    this.data.refreshData.subscribe(value => {
-      this.items.length = 0;
-    });
+    
     this.data.getCatData.subscribe(value => {
       this.items.push(value);
-      console.log('velkost pola je: ' + this.items.length);
     });
     this.data.findValues.subscribe(value => {
       this.items.push(value);
-      console.log('find items: ' + this.items);
     });
     this.auth.onAuthStateChanged(value => {
       if (value) {
@@ -79,6 +78,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.data.canSearchItems.next(true);
   }
   itemDetail(id, name, subcategory, category) {
+    this.items.length = 0;
     this.routing.navigate([], {relativeTo: this.route, queryParams: { productID: id}}).then();
     this.matDialog.open(ModalDetailItemComponent, {data: { model: name,  brand: subcategory, type: category}});
   }

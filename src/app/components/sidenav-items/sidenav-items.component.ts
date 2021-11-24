@@ -33,9 +33,11 @@ export class SidenavItemsComponent implements OnInit, OnDestroy {
   }
   getDataItemBySubCategory(maincat, subcat) {
     this.dataItems.getDataBySubCategory(maincat, subcat);
+    this.dataItems.isDataLoad.next(true);
   }
   getDataItemByMainCategory(maincat, submain) {
     this.dataItems.getDataByMainCategory(maincat, submain);
+    this.dataItems.isDataLoad.next(true);
   }
 
   closeSideNav(value: boolean) {

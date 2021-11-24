@@ -40,6 +40,7 @@ export class DataServiceService {
   isFindItemSub = new Subject<boolean>();
   updateUserAnim = new Subject<boolean>();
   refreshData = new Subject<String>();
+  isDataLoad = new Subject<boolean>();
   constructor(private db: AngularFirestore,
               private realTimeDatabase: AngularFireDatabase,
               private dialog: MatDialog) {
@@ -48,19 +49,16 @@ export class DataServiceService {
     this.component.next(component);
   }
   getDetailItem(cat, subcat, item) {
-    console.log('detail get from service: ' + cat + ' ' + subcat + ' ' + item);
     this.realTimeDatabase.object('products/' + cat + '/' + subcat + '/' + item).valueChanges().subscribe(value => {
-      console.log('detail from service: ' + value);
       this.getDetailData.next(value);
     });
   }
   getAllData(category, startLog) {
-    console.log('getAlllData are activated: ' + startLog);
+    this.refreshData.next("refresh");
     this.getMainData = new Array<any>();
     let i;
     let j;
     let product;
-    this.refreshData.next("refresh");
     for (i = 0; i < category.length; i++) {
       for (j = 0; j < category[i].subcat.length; j++) {
         this.realTimeDatabase.list('products/' + category[i].maincat + '/' + category[i].subcat[j]).valueChanges().subscribe(value => {
