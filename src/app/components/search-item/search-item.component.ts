@@ -33,8 +33,10 @@ export class SearchItemComponent implements OnInit, OnDestroy {
         this.oneCategory.subcat = Object.keys(this.data[value1]);
         this.category.push(this.oneCategory);
       });
+      console.log(this.category.length);
     });
   }
+  
   close() {
     this.dialogRef.close();
     //this.router.navigate([]).then();
@@ -48,7 +50,9 @@ export class SearchItemComponent implements OnInit, OnDestroy {
     }
     //this.dataitem.categoriesForData.unsubscribe();
   }
+
   searchItems(searchText, category, searchCat, priceForFind) {
+    console.log("search items " + category);
     this.dataitem.searchItems(searchText, category, searchCat, priceForFind);
     this.router.navigate([], { queryParams: { dialog: 'search',
         searchBy: searchCat,

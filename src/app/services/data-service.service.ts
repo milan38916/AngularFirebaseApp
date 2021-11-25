@@ -103,6 +103,8 @@ export class DataServiceService {
     this.isFindItemSub.next(false);
   }
   searchItems(searchText, category, findBy, price) {
+    console.log("find values " + category + " "+ searchText);
+
     let getItem;
     this.getMainData = new Array<any>();
     let i;
@@ -111,11 +113,10 @@ export class DataServiceService {
     this.refreshData.next("refresh");
     for (i = 0; i < category.length; i++) {
       for (j = 0; j < category[i].subcat.length; j++) {
-        this.realTimeDatabase.list('products/' + category[i].maincat + '/' + category[i].subcat[j],
-          ref => ref.orderByKey().
-          limitToLast(50)).
+        this.realTimeDatabase.list('products/' + category).
         valueChanges().
         subscribe(value => {
+          console.log(JSON.stringify(value));
           getItem = value;
           for (const item of getItem) {
               if (findBy === 'brand') {
