@@ -1,11 +1,10 @@
 <div (click)="closeDialog()" class="float-right mb-2"><mat-icon>clear</mat-icon></div>
 <div *ngIf="canShow" class="h2 float-right w-100 text-center mb-4">{{itemDetail.item.brand}} {{itemDetail.item.model}}</div>
 <div class="row">
-  <div class="col">
-    <ngb-carousel class="w-100">
-      <ng-template ngbSlide *ngFor="let image of itemDetail.item.images">
-        <img class="w-100" [src]="image" alt="images of product">
-        <div class="carousel-caption"></div>
+  <div class="col center">
+    <ngb-carousel class="img-temp">
+      <ng-template class="center" ngbSlide *ngFor="let image of itemDetail.item.images">
+        <img class="img" [src]="image" alt="images of product">
       </ng-template>
     </ngb-carousel>
   </div>

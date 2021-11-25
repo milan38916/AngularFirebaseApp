@@ -1,8 +1,24 @@
+.row {
+  width: 40vw;
+  height: 40vh;
+}
 .col{
-  max-height: 60vh;
-  max-width: 40vw;
-  min-width: 20vw;
+  height: 36vh;
+  width: 20vw;
+}
+.img {
+  max-height: 36vh;
+  max-width: 20vw;
 }
 div::-webkit-scrollbar{
   display: none;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+

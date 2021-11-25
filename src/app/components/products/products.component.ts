@@ -2,8 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ShopingcartService} from '../../services/shopingcart.service';
 import {DataServiceService} from '../../services/data-service.service';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {ModalWarningComponent} from '../modal-warning/modal-warning.component';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryModel} from '../../../models/CategoryModel';
@@ -38,6 +36,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.items.length = 0;
     this.data.canSearchItems.next(false);
+    this.dataVisible = false;
   }
   ngOnInit() {
     this.items.length = 0;
